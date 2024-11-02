@@ -10,8 +10,9 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") 
+  url      = env("DATABASE_URL")
 }
+
 model User {
   profilePicture String?
   id             Int        @id @default(autoincrement())
@@ -28,16 +29,14 @@ model User {
   isOnline       Boolean    @default(false)
 }
 
-
 model Profile {
   sampul String
-  avatar  String?
+  avatar String?
   id     Int     @id @default(autoincrement())
   bio    String?
   user   User    @relation(fields: [userId], references: [id])
   userId Int     @unique
 }
-
 
 model BookMark {
   id     String @id @default(cuid())
@@ -61,7 +60,6 @@ model Book {
   status      Status     @default(Ongoing)
 }
 
-
 model Genre {
   id    Int    @id @default(autoincrement())
   name  String @unique
@@ -69,12 +67,13 @@ model Genre {
 }
 
 model Chapter {
-  id      String @id @default(cuid())
-  chap    Int? 
-  title   String
-  bookId  String
-  book    Book   @relation(fields: [bookId], references: [id])
-  content String
+  id        String   @id @default(cuid())
+  chap      Int?
+  title     String
+  bookId    String
+  book      Book     @relation(fields: [bookId], references: [id])
+  content   String
+  createdAt DateTime @default(now())
 }
 
 enum Status {

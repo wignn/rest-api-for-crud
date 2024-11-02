@@ -216,7 +216,7 @@ console.log(chapterId)
 
 export const bookMark = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const result = await prisma.bookMark.findMany({
       where: { userId: id },
       include: {
